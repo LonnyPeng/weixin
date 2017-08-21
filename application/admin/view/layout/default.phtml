@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title>admin</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<meta http-equiv="content-language" content="zh-CN">
+	<title>Admin</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="Shortcut Icon" type="image/ico" href="favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="__CSS__/common.css" />
+	<link rel="stylesheet" type="text/css" href="__CSS__/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="__CSS__/admin-layout.css" />
+	<script type="text/javascript" src="__JS__/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-	{include file='layout/includes/header'}
+	<div id="wrapper-container">
+		<header>
+			{include file='layout/includes/header'}
+		</header>
 
-	{include file='layout/includes/sidebar'}
+		<div class="container clearfix">
+			<div class="main-wrapper">
+			<div id="sidebar">
+				{include file='layout/includes/sidebar'}
+			</div>
 
-	{__REPLACE__}
+			<div class="wrapper-content">
+				{__CONTENT__}
+			</div>
+			
+			<footer>
+				{include file='layout/includes/footer'}
+			</footer>
+		</div>
 
-	{include file='layout/includes/footer'}
+
+	</div>
 </body>
 </html>

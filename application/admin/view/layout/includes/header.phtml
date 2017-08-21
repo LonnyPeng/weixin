@@ -1,1 +1,9 @@
-<header>header</header>
+<div class="header">
+    <div id="logo">Admin System</div>
+    <div class="shortcut">
+        <ul>
+            <li><a class="u" href="<?php echo url('account/mine')?>"><?php echo \think\Session::get('login_name');?></a></li>
+            <li><a class="u" href="<?php echo url('account/logout')?>">注销</a></li>
+        </ul>
+    </div>
+</div>

@@ -141,16 +141,16 @@ return [
 
         'layout_on'     =>  true,
         'layout_name'   =>  'layout/default',
-        'layout_item'   =>  '{__REPLACE__}',
+        'layout_item'   =>  '{__CONTENT__}',
         'tpl_cache' => false,
     ],
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__JS__' => 'static/dist/js/',
-        '__CSS__' => 'static/dist/css/',
-        '__IMAGE__' => 'static/dist/images/',
-        '__AUDIO__' => 'static/dist/audio/',
+        '__JS__' => '/static/js',
+        '__CSS__' => '/static/css',
+        '__IMAGE__' => '/static/images',
+        '__AUDIO__' => '/static/audio',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
