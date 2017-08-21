@@ -14,7 +14,10 @@ class Common extends Controller
 		$this->extend = [
 			'http' => new \utils\Http(),
 			'password' => new \account\Password(),
+			'breadcrumb' => new \helper\Breadcrumb(),
 		];
+
+		$this->extend['breadcrumb']->add('Home', url('admin/index/index'));
 
 		//login
 		$controller = strtolower(request()->controller());

@@ -184,8 +184,10 @@ class Account extends Common
 
     public function mine()
     {
+        $breadcrumb = $this->extend['breadcrumb']->add('Mine');
+        
         $user = db('t_member')->field('member_name, member_regtime, admin_modified')->where(['member_id' => Session::get('login_id')])->find();
 
-        return view('', ['user' => $user]);
+        return view('', ['user' => $user, 'breadcrumb' => $breadcrumb]);
     }
 }

@@ -1,21 +1,22 @@
 <ul class="menu-list">
-    <li title="Admin" class="active">
+    <li title="Admin" class="<?php echo request()->controller() == 'account' ? 'current active' : ''?>">
         <a href="#">
             <i class="fa fa-th-large"></i>
             <span>Admin</span>
             <b class="arrow fa fa-angle-left"></b>
         </a>
-        <ul class="none sub-menu">
+        <ul class="<?php request()->controller() == 'account' ? '' : 'none'?> sub-menu">
             <li>
-            	<a href="#">
-            		<i class="menu-icon fa fa-caret-right"></i>abc
+            	<a href="<?php echo url('account/mine')?>" class="<?php echo request()->action() == 'mine' ? 'open' : ''?>">
+            		<i class="menu-icon fa fa-caret-right"></i>Mine
             	</a>
-            	<a href="#" class="open">
+            	<a href="#">
             		<i class="menu-icon fa fa-caret-right"></i>abc
             	</a>
             </li>
         </ul>
     </li>
+    <div class="sidebar-bottom clearfix"></div>
 </ul>
 
 <script type="text/javascript">
