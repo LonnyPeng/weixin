@@ -195,7 +195,6 @@
     padding-left: 5px;
 }
 #breadcrumb sup {
-    top: -2px;
     font-size: 1.3rem;
 }
 #breadcrumb .arrow-right:last-child {
