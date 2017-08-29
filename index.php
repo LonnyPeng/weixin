@@ -3,62 +3,40 @@
 include_once __DIR__ . '/Fun.php';
 
 define("TOKEN","weixin");
-
 $appid = "wx1df1a198b53b46b5";
 $appsecret = "44e0a0be39e91ab2f3271836366749f2";
 
-$urlInfo = array(
-	'url' => 'https://api.weixin.qq.com/cgi-bin/token',
-	'params' => array(
-		'grant_type' => 'client_credential',
-		'appid' => $appid,
-		'secret' => $appsecret,
-	),
-);
+/*-------------------------------------------------
+|   index.php [ 微信公众平台接口 ]
++--------------------------------------------------
+|   Author: LimYoonPer
++------------------------------------------------*/
+$wechatObj = new wechat();
+$wechatObj->responseMsg();
 
-$accessToken = curl($urlInfo);
-
-$urlInfo = array(
-	'url' => 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . $accessToken,
-	'params' => array(
-		'button' => array(
-			array(
-				'type' => 'click',
-				'name' => '首页',
-				'url' => 'http://www.shuangwei89.top/weixin.php',
-			),
-		),
-	),
-);
-$mune = curl($urlInfo, 'POST');
-
-if(checkSignature()){
-    echo $_GET["echostr"];
-}
-else{
-    echo 'error';
-}
-
-function checkSignature()
-{
-    //从GET参数中读取三个字段的值
-    $signature = $_GET["signature"];
-    $timestamp = $_GET["timestamp"];
-    $nonce = $_GET["nonce"];
-    //读取预定义的TOKEN
-    $token = TOKEN;
-    //对数组进行排序
-    $tmpArr = array($token, $timestamp, $nonce);
-    sort($tmpArr, SORT_STRING);
-    //对三个字段进行sha1运算
-    $tmpStr = implode( $tmpArr );
-    $tmpStr = sha1( $tmpStr );
-    //判断我方计算的结果是否和微信端计算的结果相符
-    //这样利用只有微信端和我方了解的token作对比,验证访问是否来自微信官方.
-    if( $tmpStr == $signature ){
-        return true;
-    }else{
-        return false;
+class wechat {
+    public function responseMsg() {
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"]; //获取POST数据
+        //用SimpleXML解析POST过来的XML数据
+        $postObj = simplexml_load_string($postStr,'SimpleXMLElement',LIBXML_NOCDATA);
+        $fromUsername = $postObj->FromUserName; //获取发送方帐号（OpenID）
+        $toUsername = $postObj->ToUserName; //获取接收方账号
+        $keyword = trim($postObj->Content); //获取消息内容
+        $time = time(); //获取当前时间戳
+        //---------- 返 回 数 据 ---------- //
+        //返回消息模板
+        $textTpl = "<xml>
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[%s]]></MsgType>
+<Content><![CDATA[%s]]></Content>
+<FuncFlag>0</FuncFlag>
+</xml>";
+        $msgType = "text"; //消息类型
+        $contentStr = "Hello World"; //返回消息内容
+        //格式化消息模板
+        $resultStr = sprintf($textTpl,$fromUsername,$toUsername,$time,$msgType,$contentStr);
+        echo $resultStr; //输出结果
     }
 }
-

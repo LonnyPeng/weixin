@@ -2,6 +2,12 @@
 
 define("TOKEN","weixin");
 
+if(checkSignature()){
+    echo $_GET["echostr"];
+} else{
+    echo 'error';
+}
+
 function checkSignature()
 {
     //从GET参数中读取三个字段的值
