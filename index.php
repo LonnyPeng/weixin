@@ -55,7 +55,7 @@ class wechatCallbackapiTest
           }elseif(preg_match('/翻译/',$keyword)){ 
               $contentStr=$this->handleTranslation($obj); 
           }else{ 
-              $contentStr=$this->handleChat($obj); 
+              $contentStr='Hello World'; 
           } 
           return $this->handleStr($obj,$contentStr); 
       } 
