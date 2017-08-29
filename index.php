@@ -12,6 +12,7 @@ $postObj = simplexml_load_string($postStr,'SimpleXMLElement',LIBXML_NOCDATA);
 $fromUsername = $postObj->FromUserName; //获取发送方帐号（OpenID）
 $toUsername = $postObj->ToUserName; //获取接收方账号
 $keyword = trim($postObj->Content); //获取消息内容
+$msgId = $postObj->MsgId;
 $time = time(); //获取当前时间戳
 //---------- 返 回 数 据 ---------- //
 //返回消息模板
@@ -19,11 +20,9 @@ $textTpl = "<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
 <CreateTime>%s</CreateTime>
-<MsgType><![CDATA[%s]]></MsgType>
+<MsgType><![CDATA[text]]></MsgType>
 <Content><![CDATA[%s]]></Content>
-<FuncFlag>0</FuncFlag>
 </xml>";
-$msgType = "text"; //消息类型
 //格式化消息模板
-$resultStr = sprintf($textTpl,$fromUsername,$toUsername,$time,$msgType,$keyword);
+$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, "123\n456");
 echo $resultStr; //输出结果
