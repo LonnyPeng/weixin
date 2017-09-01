@@ -221,8 +221,14 @@ class wechatCallbackapiTest
       
       //处理回复消息字符串 
       private function handleStr($obj,$content='',$flag=0){ 
-       $textTpl = ""; 
-       return sprintf($textTpl, $obj->FromUserName, $obj->ToUserName, time(), $content,$flag); 
+       $textTpl = "<xml>
+<ToUserName><![CDATA[%s]]></ToUserName>
+<FromUserName><![CDATA[%s]]></FromUserName>
+<CreateTime>%s</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[%s]]></Content>
+</xml>"; 
+       return sprintf($textTpl, $obj->FromUserName, $obj->ToUserName, time(), $content); 
       } 
    
    //签名验证函数 
