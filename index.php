@@ -19,7 +19,7 @@ if (!emptyempty($postStr)){
 <Content><![CDATA[%s]]></Content>
 </xml>";
         $str = sprintf($textTpl, $obj->FromUserName, $obj->ToUserName, time(), '123');
-
+        log($str);
         echo $str;
     } else {
         echo "Error";
@@ -27,4 +27,13 @@ if (!emptyempty($postStr)){
 } else { 
     echo "Error"; 
     exit; 
+}
+
+function log($str)
+{
+    $filename = __DIR__ . '/log';
+    $handel = fopen($filename, 'a');
+
+    $str = date("Y-m-d H:i:s") . ": " . $str . "\n";
+    file_put_contents($filename, $str);
 }
