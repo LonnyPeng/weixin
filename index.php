@@ -1,5 +1,7 @@
 <?php
 
+phpinfo();
+die;
 include_once __DIR__ . '/Fun.php';
 
 define("TOKEN","weixin");
