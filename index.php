@@ -6,7 +6,8 @@ define("TOKEN","weixin");
 $appid = "wx1df1a198b53b46b5";
 $appsecret = "44e0a0be39e91ab2f3271836366749f2";
 
-$postStr = $GLOBALS["HTTP_RAW_POST_DATA"]; 
+$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+log($postStr);
 if (!emptyempty($postStr)){ 
     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA); 
     $msgType = trim($postObj->MsgType);
