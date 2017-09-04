@@ -10,23 +10,19 @@ if (isset($_GET["echostr"])) {
     }
 } else {
     $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-    if (!empty($postStr)) {
-        $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-        if (trim($postObj->MsgType == 'text') {
-            $content = $object->Content;
+    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+    $content = $object->Content;
 
-            $textTpl = "<xml>  
+    $textTpl = "<xml>  
 <ToUserName><![CDATA[%s]]></ToUserName>  
 <FromUserName><![CDATA[%s]]></FromUserName>  
 <CreateTime>%s</CreateTime>  
 <MsgType><![CDATA[text]]></MsgType>  
- <Content><![CDATA[%s]]></Content>  
+<Content><![CDATA[%s]]></Content>  
 </xml>";  
-              
-            $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出  
-            echo $result; 
-        }
-    }
+      
+    $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出  
+    echo $result; 
 }
 
 
