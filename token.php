@@ -2,33 +2,11 @@
 
 define("TOKEN","weixin");
 
-if (isset($_GET["echostr"])) {
-    if(checkSignature()){
-        echo $_GET["echostr"];
-    } else{
-        echo 'error';
-    }
-} else {
-    $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-    if (!empty($postStr)) {
-        $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-        if (trim($postObj->MsgType == 'text') {
-            $content = $object->Content;
-
-            $textTpl = "<xml>  
-<ToUserName><![CDATA[%s]]></ToUserName>  
-<FromUserName><![CDATA[%s]]></FromUserName>  
-<CreateTime>%s</CreateTime>  
-<MsgType><![CDATA[text]]></MsgType>  
- <Content><![CDATA[%s]]></Content>  
-</xml>";  
-              
-            $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出  
-            echo $result; 
-        }
-    }
+if(checkSignature()){
+    echo $_GET["echostr"];
+} else{
+    echo 'error';
 }
-
 
 function checkSignature()
 {
