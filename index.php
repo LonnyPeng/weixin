@@ -12,7 +12,7 @@ if (isset($_GET["echostr"])) {
         echo 'error';
     }
 } else {
-    $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    $postStr = file_get_contents("php://input");
     file_put_contents($filename, $postStr . "\n");
 //     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 //     $content = $object->Content;
