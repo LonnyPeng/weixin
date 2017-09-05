@@ -12,23 +12,29 @@ if (isset($_GET["echostr"])) {
         echo 'error';
     }
 } else {
-    $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-    file_put_contents($filename, $postStr . "\n");
-    $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-    $content = $object->Content;
+    // $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    $str = '';
+    foreach ($_POST as $key => $value) {
+        if (is_array($value)) {
+            $value = implode(" ", $value);
+        }
+        $str .= '$key: $value';
+    }
+    file_put_contents($filename, $str . "\n");
+//     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+//     $content = $object->Content;
 
-    $textTpl = "<xml>  
-<ToUserName><![CDATA[%s]]></ToUserName>  
-<FromUserName><![CDATA[%s]]></FromUserName>  
-<CreateTime>%s</CreateTime>  
-<MsgType><![CDATA[text]]></MsgType>  
-<Content><![CDATA[%s]]></Content>  
-</xml>";  
+//     $textTpl = "<xml>  
+// <ToUserName><![CDATA[%s]]></ToUserName>  
+// <FromUserName><![CDATA[%s]]></FromUserName>  
+// <CreateTime>%s</CreateTime>  
+// <MsgType><![CDATA[text]]></MsgType>  
+// <Content><![CDATA[%s]]></Content>  
+// </xml>";  
       
-    $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出
-
-    file_put_contents($filename, $result . "\n");
-    echo $result; 
+//     $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出
+    // echo $result; 
+    echo 'success';
 }
 
 fclose($handle);
