@@ -3,7 +3,7 @@
 define("TOKEN","weixin");
 
 $filename = 'log.txt';
-$handel = fopen($filename, 'a');
+$handle = fopen($filename, 'a');
 
 if (isset($_GET["echostr"])) {
     if(checkSignature()){
