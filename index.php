@@ -2,6 +2,9 @@
 
 define("TOKEN","weixin");
 
+$filename = 'log.txt';
+$handel = fopen($filename, 'a');
+
 if (isset($_GET["echostr"])) {
     if(checkSignature()){
         echo $_GET["echostr"];
@@ -10,7 +13,7 @@ if (isset($_GET["echostr"])) {
     }
 } else {
     $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-    log($postStr);
+    file_put_contents($filename, $postStr . "\n");
     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
     $content = $object->Content;
 
@@ -24,9 +27,11 @@ if (isset($_GET["echostr"])) {
       
     $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出
 
-    log($result);
+    file_put_contents($filename, $result . "\n");
     echo $result; 
 }
+
+fclose($handle);
 
 
 function checkSignature()
@@ -50,11 +55,4 @@ function checkSignature()
     }else{
         return false;
     }
-}
-
-function log($str) {
-    $filename = 'log.txt';
-    $handel = fopen($filename, 'a');
-
-    file_put_contents($filename, $str . "\n");
 }
