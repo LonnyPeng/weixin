@@ -10,6 +10,7 @@ if (isset($_GET["echostr"])) {
     }
 } else {
     $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    log($postStr);
     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
     $content = $object->Content;
 
@@ -21,7 +22,9 @@ if (isset($_GET["echostr"])) {
 <Content><![CDATA[%s]]></Content>  
 </xml>";  
       
-    $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出  
+    $result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);  //格式化输出
+
+    log($result);
     echo $result; 
 }
 
@@ -47,4 +50,11 @@ function checkSignature()
     }else{
         return false;
     }
+}
+
+function log($str) {
+    $filename = 'log.txt';
+    $handel = fopen($filename, 'a');
+
+    file_put_contents($filename, $str . "\n");
 }
