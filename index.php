@@ -12,15 +12,8 @@ if (isset($_GET["echostr"])) {
         echo 'error';
     }
 } else {
-    // $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-    $str = '';
-    foreach ($_POST as $key => $value) {
-        if (is_array($value)) {
-            $value = implode(" ", $value);
-        }
-        $str .= '$key: $value';
-    }
-    file_put_contents($filename, $str . "\n");
+    $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    file_put_contents($filename, $postStr . "\n");
 //     $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 //     $content = $object->Content;
 
