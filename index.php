@@ -17,3 +17,5 @@ $str .= "\n\r";
 fwrite($handle, $str);
 
 fclose($handle);
+
+echo "weixin";
