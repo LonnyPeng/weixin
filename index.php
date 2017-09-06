@@ -10,6 +10,7 @@ $info = array(
 	'server' => $_SERVER,
 	'globals' => $GLOBALS["HTTP_RAW_POST_DATA"],
 	'post' => $_POST,
+	'input' => file_get_contents('php://input'),
 );
 $str .= var_export($info, true);
 
