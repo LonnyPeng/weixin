@@ -1,17 +1,15 @@
 <?php
 
-$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-$content = $object->Content;
+$handle = fopen('log.txt', 'a');
 
-$textTpl = "<xml>  
-<ToUserName><![CDATA[%s]]></ToUserName>  
-<FromUserName><![CDATA[%s]]></FromUserName>  
-<CreateTime>%s</CreateTime>  
-<MsgType><![CDATA[text]]></MsgType>  
-<Content><![CDATA[%s]]></Content>  
-</xml>";  
-  
-$result = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);
+$str = '';
 
-echo $result;
+$str .= date("Y-m-d H:i:s") . ": ";
+
+$str .= var_export($_SERVER, true);
+
+$str .= "\n\r";
+
+fwrite($handle, $str);
+
+fclose($handle);
