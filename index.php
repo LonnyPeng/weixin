@@ -18,4 +18,4 @@ fwrite($handle, $str);
 
 fclose($handle);
 
-echo "weixin";
+// echo "weixin";
