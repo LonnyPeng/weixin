@@ -8,11 +8,7 @@ function saveLog($str = '') {
 
 	$str .= date("Y-m-d H:i:s") . ": ";
 
-	$str .= var_export($str, true);
-
-	$str .= "\n\r";
-
-	fwrite($handle, $str);
+	fwrite($handle, var_export($str, true) . "\n\r");
 
 	fclose($handle);
 }
