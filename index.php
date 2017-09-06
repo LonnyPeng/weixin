@@ -6,7 +6,11 @@ $str = '';
 
 $str .= date("Y-m-d H:i:s") . ": ";
 
-$str .= var_export($_SERVER, true);
+$info = array(
+	'server' => $_SERVER,
+	'post' => $_POST,
+);
+$str .= var_export($info, true);
 
 $str .= "\n\r";
 
