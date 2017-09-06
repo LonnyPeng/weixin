@@ -8,7 +8,8 @@ $str .= date("Y-m-d H:i:s") . ": ";
 
 $info = array(
 	'server' => $_SERVER,
-	'post' => $GLOBALS["HTTP_RAW_POST_DATA"],
+	'globals' => $GLOBALS["HTTP_RAW_POST_DATA"],
+	'post' => $_POST,
 );
 $str .= var_export($info, true);
 
