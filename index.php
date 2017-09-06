@@ -1,23 +1,18 @@
 <?php
 
-$handle = fopen('log.txt', 'a');
+$str = file_get_contents('php://input');
+log($str);
 
-$str = '';
+function log($str = '') {
+	$handle = fopen('log.txt', 'a');
 
-$str .= date("Y-m-d H:i:s") . ": ";
+	$str .= date("Y-m-d H:i:s") . ": ";
 
-$info = array(
-	'server' => $_SERVER,
-	'globals' => $GLOBALS["HTTP_RAW_POST_DATA"],
-	'post' => $_POST,
-	'input' => file_get_contents('php://input'),
-);
-$str .= var_export($info, true);
+	$str .= var_export($str, true);
 
-$str .= "\n\r";
+	$str .= "\n\r";
 
-fwrite($handle, $str);
+	fwrite($handle, $str);
 
-fclose($handle);
-
-// echo "weixin";
+	fclose($handle);
+}
