@@ -16,7 +16,7 @@ if (isset($_GET["echostr"]) && isset($_GET["signature"]) && isset($_GET["timesta
 	$tmpStr = sha1($tmpStr);
 
 	if($tmpStr == $signature) {
-	    echo $_GET["echostr"]
+	    echo $_GET["echostr"];
 	} else {
 	    echo 'error';
 	}
