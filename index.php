@@ -51,5 +51,13 @@ if (isset($_GET["echostr"]) && isset($_GET["signature"]) && isset($_GET["timesta
 		'url' => "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" . $accessToken,
 		'params' => $data,
 	);
-	curl($urlInfo, 'POST');
+	$postStr = curl($urlInfo, 'POST');
+
+	$handle = fopen('log.txt', 'a');
+
+	$postStr = date("Y-m-d H:i:s") . ": " . $postStr . "\n\r";
+
+	fwrite($handle, $postStr);
+
+	fclose($handle);
 }
