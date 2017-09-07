@@ -21,13 +21,17 @@ if (isset($_GET["echostr"]) && isset($_GET["signature"]) && isset($_GET["timesta
 	    echo 'error';
 	}
 } else {
-	$str = file_get_contents('php://input');
+	$postStr = file_get_contents('php://input');
+	$postObj = simplexml_load_string($postStr,'SimpleXMLElement',LIBXML_NOCDATA);
+	$fromUsername = $postObj->FromUserName;
+	$toUsername = $postObj->ToUserName;
+	$keyword = trim($postObj->Content);
 
 	$handle = fopen('log.txt', 'a');
 
-	$str = date("Y-m-d H:i:s") . ": " . $str . "\n\r";
+	$postStr = date("Y-m-d H:i:s") . ": " . $postStr . "\n\r";
 
-	fwrite($handle, $str);
+	fwrite($handle, $postStr);
 
 	fclose($handle);
 }
