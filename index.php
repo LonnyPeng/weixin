@@ -31,6 +31,8 @@ if (isset($_GET["echostr"]) && isset($_GET["signature"]) && isset($_GET["timesta
 	$toUsername = $postObj->ToUserName;
 	$keyword = trim($postObj->Content);
 
+	$result = translateGoogleApi(array('tl' => 'en', 'text' => $keyword));
+
 	$textTpl = "<xml>
 <ToUserName><![CDATA[%s]]></ToUserName>
 <FromUserName><![CDATA[%s]]></FromUserName>
@@ -40,7 +42,7 @@ if (isset($_GET["echostr"]) && isset($_GET["signature"]) && isset($_GET["timesta
 <FuncFlag>0</FuncFlag>
 </xml>";
 	
-	$contentStr = sprintf($textTpl, $fromUsername, $toUsername, time(), 'text', $keyword);
+	$contentStr = sprintf($textTpl, $fromUsername, $toUsername, time(), 'text', $result);
 
 	echo $contentStr;
 
